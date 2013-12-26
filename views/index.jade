@@ -1,5 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .row
+    .col-lg-6(ng-controller='userCtrl', ng-hide="isConnected")
+        .well
+            form(name='connectionForm', class='form-horizontal', novalidate)
+                fieldset
+                    .form-group
+                        label(class='col-lg-2 control-label', for='inputNameConnection') Nom
+                        .col-lg-10
+                            input(type='text', ng-model='name', required, class='form-control', id='inputNameConnection')
+                    .form-group
+                        label(class='col-lg-2 control-label', for='inputPasswordConnection') Mot de passe
+                        .col-lg-10
+                            input(type='password', ng-model='password', required, class='form-control', id='inputPasswordConnection')
+                button(ng-disabled='connectionForm.$invalid', class='btn btn-primary', ng-click='connect()') Ok
+  .row
+    .col-xs-12(ng-controller='lexiconCtrl', ng-show="isConnected")
+        ul
+            li(ng-repeat='lexicon in lexicons', ng-click='showLexicon(lexicon)') {{lexicon.name}}
+            li
+                button(ng-click='newLexicon()', class='btn btn-primary') Nouveau lexique 
+      
