@@ -1,5 +1,6 @@
 var colors = require("colors");
 var Q = require("q");
+var http = require('http');
 var userCtrl = require("../controllers/user").userCtrl;
 var lexiconCtrl = require("../controllers/lexicon").lexiconCtrl;
 
@@ -74,6 +75,70 @@ exports.getLexicons = function(req, res){
             res.status(400);
             res.send({error: error});
         });
+  }
+  else {
+      res.status(400);
+      res.send({error: "User must be connected"});
+  }
+};
+
+exports.addWord = function(req, res) {
+  if(req.session.user) {
+    if(req.body.lexiconId && req.body.word && req.body.translations) {
+        console.log(("Try to register word").yellow);
+        var promise = lexiconCtrl.addWord(req.body.lexiconId, req.body.word, req.body.translations);
+        promise.then(function(data) {
+                res.send(data);
+            },
+            function(error) {
+                console.log(("Can't add word: " + error).red);
+                res.status(400);
+                res.send({error: error});
+            });
+    }
+  }
+  else {
+      res.status(400);
+      res.send({error: "User must be connected"});
+  }
+};
+
+var options = {
+  host: 'api.wordreference.com',
+  path: '/0.8/fe477/json/enfr/'
+};
+
+exports.getTranslations = function(req, res){
+  if(req.session.user) {
+    if(req.body.word) {
+        console.log(("Try to get translations for: " + req.body.word).yellow);
+        var ownerId = req.session.user.id;
+        
+        http.request({host: options.host, path: options.path + req.body.word}, function(response) {
+            var str = '';
+
+            //another chunk of data has been recieved, so append it to `str`
+            response.on('data', function (chunk) {
+              str += chunk;
+            });
+
+            //the whole response has been recieved, so we just print it out here
+            response.on('end', function () {
+              var result = JSON.parse(str);
+              var translations = [];
+              
+              if(result.Error) {
+                  console.log((result.Error).red);
+              }
+              else if(result.term0 && result.term0.PrincipalTranslations) {
+                  translations.push(result.term0.PrincipalTranslations[0].FirstTranslation);
+                  translations.push(result.term0.PrincipalTranslations[0].SecondTranslation);
+              }
+              
+              res.send(translations);
+            });
+        }).end();    
+    }
   }
   else {
       res.status(400);

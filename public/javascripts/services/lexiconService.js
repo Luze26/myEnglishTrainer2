@@ -42,5 +42,13 @@ angular.module('trainer').factory('lexiconService', ['$http', '$rootScope', '$q'
         return deferred.promise;
     };
     
+    service.addWord = function(word, translations) {
+        $http.post("/lexicon/addWord", {word: word, translations: translations})
+            .success(function(data) {
+            })
+            .error(function(error){
+            });
+    };
+    
     return service;
 }]);

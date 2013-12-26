@@ -21,4 +21,16 @@ block content
             li(ng-repeat='lexicon in lexicons', ng-click='showLexicon(lexicon)') {{lexicon.name}}
             li
                 button(ng-click='newLexicon()', class='btn btn-primary') Nouveau lexique 
+        form(name='wordForm', class='form-horizontal', novalidate)
+                fieldset
+                    .form-group
+                        label(class='col-lg-2 control-label', for='inputWordWord') Mot
+                        .col-lg-10
+                            input(type='text', ng-model='word', required, class='form-control', id='inputWordWord')
+                            button(ng-disabled='wordForm.$invalid', class='btn btn-primary', ng-click='translate()') Traduire
+                    .form-group(ng-repeat='translation in translations')
+                        label(class='col-lg-2 control-label') {{$index}}
+                        input(type='text', ng-model='translation.term', required, class='form-control col-lg-4')
+                        input(type='text', ng-model='translation.sense', required, class='form-control col-lg-4')
+                button(ng-click='addWord()', class='btn btn-primary') Ajouter au lexique
       

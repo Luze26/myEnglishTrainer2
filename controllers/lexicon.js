@@ -1,4 +1,5 @@
 var Lexicon = require("../models/lexicon").Lexicon;
+var Word = require("../models/word").Word;
 var Q = require("q");
 
 var lexiconCtrl = {};
@@ -32,6 +33,22 @@ lexiconCtrl.getLexicons = function(ownerId) {
                 }
             });
     return deferred.promise;        
+};
+
+lexiconCtrl.addWord = function(lexiconId, word) {
+    var deferred = Q.defer();
+    var word = new Word({lexiconId: lexiconId, word: word.word, translations: word.translations});
+    word.save(function(err, word) {
+        if(err) {
+            console.error.bind(console, 'DB error while registering new word');
+            deferred.reject("DB error");
+        }
+        else {
+            deferred.resolve(word);
+        }
+    });
+    
+    return deferred.promise;
 };
 
 module.exports = {
