@@ -39,6 +39,7 @@ app.post('/user/connect', routes.connect);
 app.get('/user/getCurrent', routes.getCurrent);
 app.post('/lexicon/new', routes.newLexicon);
 app.get('/lexicon/all', routes.getLexicons);
+app.get('/lexicon/get/:id', routes.getLexicon);
 app.post('/lexicon/addWord', routes.addWord);
 app.post('/translation/get', routes.getTranslations);
 

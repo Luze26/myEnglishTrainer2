@@ -1,0 +1,30 @@
+.row
+    .col-xs-12
+        div(ng-controller='dashboardCtrl', ng-show="pageService.page === 1", ng-cloak, class="page dashboard")
+            .row
+                .col-md-6
+                    .lg-well
+                        div(class='lg-well-header blue')
+                            Mes Lexiques
+                            ul
+                                li(ng-click='newLexicon()', class='new-lexicon', title='Nouveau Lexique')
+                                    img(src='/images/plus-icon.png' alt='plus')
+                        ul(class='dashboard-lexicons')
+                            li(ng-repeat='lexicon in lexicons', ng-click='selectLexicon(lexicon)') {{lexicon.name}}
+                .col-md-6
+                    .lg-well
+                        div(class='lg-well-header green')
+                            Mes Stats
+            .row
+                .col-md-4
+                    .lg-well
+                        div(class='lg-well-header yellow')
+                            Mes Badges
+                .col-md-4
+                    .lg-well
+                        div(class='lg-well-header turquoise')
+                            Mes Raccourcis
+                .col-md-4
+                    .lg-well
+                        div(class='lg-well-header red')
+                            Lexiques Populaires

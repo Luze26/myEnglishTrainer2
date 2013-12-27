@@ -6,7 +6,11 @@ var WordSchema = new mongoose.Schema({
       index: true
   },
   word: String,
-  translations: [Object]
+  translations: [{
+          POST: String,
+          sense: String,
+          term: String          
+    }]
 });
 
 var Word = mongoose.model('Word', WordSchema);

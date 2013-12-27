@@ -1,0 +1,41 @@
+.dashboard {
+    &.ng-hide-remove {
+        -webkit-animation: bounceInUp 1s linear;
+        animation: bounceInUp 1s linear; 
+    }
+
+    &.ng-hide-add {
+        -webkit-animation: slideOutLeft .5s linear;
+        animation: slideOutLeft .5s linear; 
+        display: block !important;
+    }
+
+    .lg-well {
+        height: 300px;
+        margin-top: 30px;
+    }
+}
+
+.dashboard-lexicons {
+    list-style: none;
+    padding: 0;
+
+    li {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 20px;
+        cursor: pointer;
+
+        &:nth-child(odd) {
+            background-color: #f3f9f8;
+        }
+
+        &:hover {
+            background-color: #43bda5;
+            color: #fff;
+        }
+    }
+
+    border-bottom: solid 1px #f3f9f8;
+}

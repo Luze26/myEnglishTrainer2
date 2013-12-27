@@ -1,0 +1,17 @@
+.row
+    .col-xs-12
+        div(ng-controller='loginCtrl', ng-hide="pageService.page !== 0", class="page index")
+            div(class='index-header')
+                h1 LOGUS
+            div(class='lg-well index-connection')
+                form(name='connectionForm', class='form-horizontal', novalidate)
+                    fieldset
+                        .form-group
+                            label(class='col-lg-4 control-label', for='inputNameConnection') Nom
+                            .col-lg-8
+                                input(type='text', ng-model='name', required, class='form-control', id='inputNameConnection')
+                        .form-group
+                            label(class='col-lg-4 control-label', for='inputPasswordConnection') Mot de passe
+                            .col-lg-8
+                                input(type='password', ng-model='password', required, class='form-control', id='inputPasswordConnection')
+                    a(href='#', ng-disabled='connectionForm.$invalid', class='btn lg-btn', ng-click='connect()') Se connecter / S'inscrire

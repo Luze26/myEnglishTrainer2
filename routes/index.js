@@ -82,11 +82,36 @@ exports.getLexicons = function(req, res){
   }
 };
 
+exports.getLexicon = function(req, res){
+  if(req.session.user) {
+    var ownerId = req.session.user.id;
+    var lexiconId = req.params.id;
+    
+    console.log(("Try to get lexicon " + lexiconId + " of: " + ownerId).yellow);
+
+    if(ownerId && lexiconId) {
+        var promise = lexiconCtrl.getLexicon(ownerId, lexiconId);
+        promise.then(function(data) {
+                res.send(data);
+            },
+            function(error) {
+                console.log(("Can't get lexicon: " + error).red);
+                res.status(400);
+                res.send({error: error});
+            });
+    }
+  }
+  else {
+      res.status(400);
+      res.send({error: "User must be connected"});
+  }
+};
+
 exports.addWord = function(req, res) {
   if(req.session.user) {
-    if(req.body.lexiconId && req.body.word && req.body.translations) {
+    if(req.body.lexiconId && req.body.word) {
         console.log(("Try to register word").yellow);
-        var promise = lexiconCtrl.addWord(req.body.lexiconId, req.body.word, req.body.translations);
+        var promise = lexiconCtrl.addWord(req.body.lexiconId, req.body.word);
         promise.then(function(data) {
                 res.send(data);
             },

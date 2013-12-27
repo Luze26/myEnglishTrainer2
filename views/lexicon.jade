@@ -1,0 +1,33 @@
+.row
+    .col-xs-12
+        div(ng-controller='lexiconCtrl', ng-show="pageService.page === 2", ng-cloak, class="page lexicon lg-well")
+            div(class='lg-well-header blue') Lexique: {{lexicon.name}}
+                ul
+                    li(ng-click='showLexicon()') Le lexique
+                    li(ng-click='showAddWord()')
+                        img(src='/images/plus-icon.png' alt='plus')
+                    li(ng-click='pageService.changePage(1)') Retourner au tableau de bord
+            div(ng-show='tab === 0')
+                table(class='table table-striped table-bordered table-hover')
+                    thead
+                        tr
+                            th Mot
+                            th Traduction
+                            th Sens
+                            th Tags
+                    tbody
+                        tr(ng-repeat='word in lexiconService.words')
+                            td(colspan="4") {{word.word}}
+            div(ng-show='tab === 1')
+                form(name='wordForm', class='form-horizontal', novalidate)
+                                        fieldset
+                                            .form-group
+                                                label(class='col-lg-2 control-label', for='inputWordWord') Mot
+                                                .col-lg-10
+                                                    input(type='text', ng-model='word', required, class='form-control', id='inputWordWord')
+                                                    button(ng-disabled='wordForm.$invalid', class='btn btn-primary', ng-click='translate()') Traduire
+                                            .form-group(ng-repeat='translation in translations')
+                                                label(class='col-lg-2 control-label') {{$index}}
+                                                input(type='text', ng-model='translation.term', required, class='form-control col-lg-4')
+                                                input(type='text', ng-model='translation.sense', required, class='form-control col-lg-4')
+                                        button(ng-click='addWord()', class='btn btn-primary') Ajouter au lexique

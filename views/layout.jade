@@ -8,10 +8,13 @@ html
     .container
         block content
 
-    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.js')
     script(src='/javascripts/modules/trainerModule.js')
     script(src='/javascripts/services/userService.js')
+    script(src='/javascripts/services/pageService.js')
     script(src='/javascripts/services/translationService.js')
     script(src='/javascripts/services/lexiconService.js')
-    script(src='/javascripts/controllers/userCtrl.js')
+    script(src='/javascripts/controllers/loginCtrl.js')
+    script(src='/javascripts/controllers/dashboardCtrl.js')
     script(src='/javascripts/controllers/lexiconCtrl.js')

@@ -13,6 +13,9 @@ angular.module('trainer').factory('lexiconService', ['$http', '$rootScope', '$q'
     
     service.lexicons = [];
     
+    service.selectedLexicon = null;
+    
+    service.words = [];
     
     //////////////////////////////////////////////////
     //  METHODS
@@ -42,12 +45,30 @@ angular.module('trainer').factory('lexiconService', ['$http', '$rootScope', '$q'
         return deferred.promise;
     };
     
-    service.addWord = function(word, translations) {
-        $http.post("/lexicon/addWord", {word: word, translations: translations})
+    service.addWord = function(lexiconId, word) {
+        $http.post("/lexicon/addWord", {lexiconId: lexiconId, word: word})
             .success(function(data) {
             })
             .error(function(error){
             });
+    };
+    
+    
+    service.getWords = function(lexiconId) {
+        lexiconId = !!lexiconId ? lexiconId : service.selectedLexicon._id;
+        
+         $http.get("/lexicon/get/" + lexiconId)
+            .success(function(data) {
+                service.words = data.words;
+            })
+            .error(function(error){
+                console.log(error);
+            });
+    };
+    
+    service.selectLexicon = function(lexicon) {
+        service.selectedLexicon = lexicon;
+        service.getWords();
     };
     
     return service;

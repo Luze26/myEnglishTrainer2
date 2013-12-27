@@ -1,1 +1,1 @@
-angular.module('trainer', []);
+angular.module('trainer', ['ngAnimate']);

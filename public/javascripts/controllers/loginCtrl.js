@@ -1,19 +1,15 @@
-angular.module('trainer').controller('userCtrl', ['$scope', 'userService', 
-    function($scope, userService) {
+angular.module('trainer').controller('loginCtrl', ['$scope', 'userService', 'pageService',
+    function($scope, userService, pageService) {
     
     //////////////////////////////////////////////////
     //  ATTRIBUTES
     //////////////////////////////////////////////////
     
-    $scope.isConnected = false;
+    $scope.pageService = pageService;
     
     //////////////////////////////////////////////////
     //  METHODS
     //////////////////////////////////////////////////
-    
-    $scope.$on('connection', function(event, data) {
-        $scope.isConnected = true;
-    });
     
     $scope.connect = function() {
         userService.connect($scope.name, $scope.password)
