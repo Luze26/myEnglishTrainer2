@@ -32,8 +32,12 @@ exports.getTranslations = function(req, res){
                   console.log((result.Error).red);
               }
               else if(result.term0 && result.term0.PrincipalTranslations) {
-                  translations.push(formatTranslation(result.term0.PrincipalTranslations[0].FirstTranslation));
-                  translations.push(formatTranslation(result.term0.PrincipalTranslations[0].SecondTranslation));
+                  if(result.term0.PrincipalTranslations[0].FirstTranslation) {
+                    translations.push(formatTranslation(result.term0.PrincipalTranslations[0].FirstTranslation));
+                    if(result.term0.PrincipalTranslations[0].SecondTranslation) {
+                        translations.push(formatTranslation(result.term0.PrincipalTranslations[0].SecondTranslation));
+                    }
+                  }
               }
               
               res.send(translations);

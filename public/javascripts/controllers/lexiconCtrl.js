@@ -42,7 +42,7 @@ angular.module('trainer').controller('lexiconCtrl', ['$scope', 'lexiconService',
     };
     
     $scope.addTranslation = function() {
-        $scope.translations.push({term: "", sense: "", tags: ""});
+        $scope.translations.push({term: "", sense: "", tags: []});
     };
     
     $scope.addTag = function(tag, translation) {
