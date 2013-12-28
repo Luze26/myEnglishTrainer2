@@ -9,16 +9,19 @@
                     Choisir un lexique
                     ul(class='dashboard-lexicons')
                         li(ng-repeat='lexicon in lexicons', ng-click='selectLexicon(lexicon)') {{lexicon.name}}
-                div(ng-show='quizStarted', ng-cloak)
+                div(ng-show='quizStarted && !quizFinished', ng-cloak)
                     h2(class='quiz-word') Mot à traduire: {{word.word}}
                     hr
                     .row
-                        label(class='col-xs-2 col-xs-offset-1') Traduction
+                        label(class='col-xs-2') Traduction
                         .col-xs-6
-                            input(type='text', ng-model='response', required, class='form-control')
-                        button(ng-click='checkResponse()', class='col-xs-2 btn btn-primary btn-margin') Ok
-                    .row
-                        table(class='table table-striped table-bordered table-hover', ng-show='showAnswer')
+                            input(type='text', id='inputResponse', ng-model='response', required, class='form-control')
+                        button(ng-click='checkResponse()', ng-disabled='result !== null', class='col-xs-2 btn btn-primary btn-margin') Ok
+                        button(ng-click='noResponse()', ng-disabled='result !== null', class='col-xs-2 btn btn-primary btn-margin') Passer
+                    .row(ng-show='showAnswer')
+                        div(class='alert alert-success', ng-show='result') Well done
+                        div(class='alert alert-danger', ng-hide='result') Try again
+                        table(class='table table-striped table-bordered table-hover')
                             thead
                                 tr
                                     th(class='col-xs-1') POS
@@ -32,3 +35,5 @@
                                     td(class='col-xs-4') {{translation.sense}}
                                     td(class='col-xs-5') {{translation.tags}}
                         button(ng-click='nextWord()', class='btn btn-primary btn-margin') Suivant
+                div(ng-show='quizFinished', ng-cloak)
+                    h2 Score: {{quizService.finalScore}}/20
