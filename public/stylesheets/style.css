@@ -94,8 +94,8 @@
   position: relative;
 }
 .index.ng-hide-add {
-  -webkit-animation: slideOutUp 1s linear;
-  animation: slideOutUp 1s linear;
+  -webkit-animation: slideOutUp .8s linear;
+  animation: slideOutUp .8s linear;
   display: block ! important;
 }
 .index-header {
@@ -115,15 +115,6 @@
 }
 .index-connection form {
   text-align: center;
-}
-.dashboard.ng-hide-remove {
-  -webkit-animation: bounceInUp 1s linear;
-  animation: bounceInUp 1s linear;
-}
-.dashboard.ng-hide-add {
-  -webkit-animation: slideOutLeft .5s linear;
-  animation: slideOutLeft .5s linear;
-  display: block !important;
 }
 .dashboard .lg-well {
   height: 300px;
@@ -148,15 +139,15 @@
   background-color: #43bda5;
   color: #fff;
 }
-.lexicon.ng-hide-remove {
-  -webkit-animation: bounceInUp 1s linear;
-  animation: bounceInUp 1s linear;
-}
-.lexicon.ng-hide-add {
-  -webkit-animation: slideOutLeft .5s linear;
-  animation: slideOutLeft .5s linear;
-  display: block !important;
-}
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28 déc. 2013, 12:12:44
+    Author     : yuzel
+*/
 body {
   overflow-y: hidden;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -179,6 +170,9 @@ body {
 a {
   color: #00B7FF;
 }
+.btn-margin {
+  margin-bottom: 35px;
+}
 .logo {
   position: absolute;
   top: 30px;
@@ -193,6 +187,15 @@ a {
   width: 100%;
   top: 0px;
   margin-top: 5%;
+}
+.page-animation.ng-hide-remove {
+  -webkit-animation: bounceInUp .8s linear;
+  animation: bounceInUp .8s linear;
+}
+.page-animation.ng-hide-add {
+  -webkit-animation: slideOutLeft .5s linear;
+  animation: slideOutLeft .5s linear;
+  display: block !important;
 }
 .lg-btn {
   display: inline-block;

@@ -1,6 +1,6 @@
 .row
     .col-xs-12
-        div(ng-controller='lexiconCtrl', ng-show="pageService.page === 2", ng-cloak, class="page lexicon lg-well")
+        div(ng-controller='lexiconCtrl', ng-show="pageService.page === 2", ng-cloak, class="page page-animation lg-well")
             div(class='lg-well-header blue') Lexique: {{lexicon.name}}
                 ul
                     li(ng-click='showLexicon()') Le lexique
@@ -11,23 +11,54 @@
                 table(class='table table-striped table-bordered table-hover')
                     thead
                         tr
-                            th Mot
-                            th Traduction
-                            th Sens
-                            th Tags
+                            th(class='col-xs-2') Mot
+                            th(class='col-xs-10') Traductions
                     tbody
                         tr(ng-repeat='word in lexiconService.words')
-                            td(colspan="4") {{word.word}}
+                            td(class='col-xs-2') {{word.word}}
+                            td(class='col-xs-10')
+                                table(class='table table-striped table-bordered table-hover')
+                                    thead
+                                        tr
+                                            th(class='col-xs-1') POS
+                                            th(class='col-xs-2') Traduction
+                                            th(class='col-xs-5') Sens
+                                            th(class='col-xs-5') Tags
+                                    tbody
+                                        tr(ng-repeat='translation in word.translations')
+                                            td(class='col-xs-1') {{translation.POS}}
+                                            td(class='col-xs-2') {{translation.term}}
+                                            td(class='col-xs-4') {{translation.sense}}
+                                            td(class='col-xs-5') {{translation.tags}}
             div(ng-show='tab === 1')
-                form(name='wordForm', class='form-horizontal', novalidate)
-                                        fieldset
-                                            .form-group
-                                                label(class='col-lg-2 control-label', for='inputWordWord') Mot
-                                                .col-lg-10
-                                                    input(type='text', ng-model='word', required, class='form-control', id='inputWordWord')
-                                                    button(ng-disabled='wordForm.$invalid', class='btn btn-primary', ng-click='translate()') Traduire
-                                            .form-group(ng-repeat='translation in translations')
-                                                label(class='col-lg-2 control-label') {{$index}}
-                                                input(type='text', ng-model='translation.term', required, class='form-control col-lg-4')
-                                                input(type='text', ng-model='translation.sense', required, class='form-control col-lg-4')
-                                        button(ng-click='addWord()', class='btn btn-primary') Ajouter au lexique
+                form(name='wordForm', class='form-horizontal col-xs-12', novalidate)
+                    fieldset
+                        .form-group
+                            label(class='col-xs-2 control-label', for='inputWordWord') Mot
+                            .col-xs-8
+                                input(type='text', ng-model='word', name='word', required, class='form-control', id='inputWordWord')
+                            .col-xs-2
+                                button(ng-disabled='wordForm.word.$invalid', class='btn lg-btn', ng-click='translate()') Traduire
+                        hr
+                        button(ng-click='addTranslation()', class='btn btn-primary btn-margin') Ajouter une Traduction
+                        table(class='table table-striped table-bordered table-hover')
+                            thead
+                                tr
+                                    th POS
+                                    th Traduction
+                                    th Sens
+                                    th Tags
+                            tbody
+                                tr(ng-repeat='translation in translations', ng-init='inputTag={}')
+                                    td(class='col-xs-1')
+                                        input(type='text', ng-model='translation.POS', class='form-control')
+                                    td(class='col-xs-4')
+                                        input(type='text', ng-model='translation.term', required, class='form-control')
+                                    td(class='col-xs-4')
+                                        input(type='text', ng-model='translation.sense', required, class='form-control')
+                                    td(class='col-xs-4')
+                                        input(type='text', ng-model='inputTag.tag', class='form-control col-xs-8')
+                                        button(ng-click='addTag(inputTag, translation)', class='btn btn-primary') +
+                                        div(class='tag', ng-repeat='tag in translation.tags')
+                                            {{tag}}
+                    button(ng-click='addWord()', class='btn btn-primary btn-margin') Ajouter au lexique

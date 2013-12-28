@@ -2,6 +2,7 @@
 @import 'index.less';
 @import 'dashboard.less';
 @import 'lexicon.less';
+@import 'quiz.less';
 
 body {
     overflow-y:hidden;
@@ -23,6 +24,10 @@ a {
   color: #00B7FF;
 }
 
+.btn-margin {
+    margin-bottom: 35px;
+}
+
 .logo {
     position: absolute;
     top: 30px;
@@ -38,6 +43,19 @@ a {
     width: 100%;
     top: 0px;
     margin-top: 5%;
+}
+
+.page-animation {
+    &.ng-hide-remove {
+        -webkit-animation: bounceInUp .8s linear;
+        animation: bounceInUp .8s linear; 
+    }
+
+    &.ng-hide-add {
+        -webkit-animation: slideOutLeft .5s linear;
+        animation: slideOutLeft .5s linear; 
+        display: block !important;
+    }
 }
 
 .lg-btn {

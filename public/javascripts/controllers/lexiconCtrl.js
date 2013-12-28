@@ -29,7 +29,7 @@ angular.module('trainer').controller('lexiconCtrl', ['$scope', 'lexiconService',
         $scope.translations = [];
         translationService.getTranslations($scope.word)
             .then(function(data) {
-                $scope.translations = data;
+                $scope.translations = $scope.translations.concat(data);
             },
             function(error) {
             });
@@ -39,6 +39,15 @@ angular.module('trainer').controller('lexiconCtrl', ['$scope', 'lexiconService',
         lexiconService.addWord($scope.lexicon._id, {word: $scope.word, translations: $scope.translations});
         $scope.translations = [];
         $scope.word = "";
+    };
+    
+    $scope.addTranslation = function() {
+        $scope.translations.push({term: "", sense: "", tags: ""});
+    };
+    
+    $scope.addTag = function(tag, translation) {
+        translation.tags.push(tag.tag);
+        tag.tag = "";
     };
     
     $scope.showLexicon = function() {

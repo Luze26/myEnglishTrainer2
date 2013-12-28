@@ -5,6 +5,10 @@
 
 var express = require('express');
 var routes = require('./routes');
+var lexicon = require('./routes/lexicon');
+var word = require('./routes/word');
+var translation = require('./routes/translation');
+var quiz = require('./routes/quiz');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
@@ -37,11 +41,12 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/user/connect', routes.connect);
 app.get('/user/getCurrent', routes.getCurrent);
-app.post('/lexicon/new', routes.newLexicon);
-app.get('/lexicon/all', routes.getLexicons);
-app.get('/lexicon/get/:id', routes.getLexicon);
-app.post('/lexicon/addWord', routes.addWord);
-app.post('/translation/get', routes.getTranslations);
+app.post('/lexicon/new', lexicon.newLexicon);
+app.get('/lexicon/all', lexicon.getLexicons);
+app.get('/lexicon/get/:id', lexicon.getLexicon);
+app.post('/lexicon/addWord', word.addWord);
+app.post('/translation/get', translation.getTranslations);
+app.post('/quiz/generate', quiz.generate);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log(('Express server listening on port ' + app.get('port')).cyan);

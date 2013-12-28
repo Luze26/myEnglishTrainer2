@@ -1,6 +1,6 @@
 .row
     .col-xs-12
-        div(ng-controller='dashboardCtrl', ng-show="pageService.page === 1", ng-cloak, class="page dashboard")
+        div(ng-controller='dashboardCtrl', ng-show="pageService.page === 1", ng-cloak, class="page page-animation dashboard")
             .row
                 .col-md-6
                     .lg-well
@@ -24,6 +24,8 @@
                     .lg-well
                         div(class='lg-well-header turquoise')
                             Mes Raccourcis
+                        div
+                            button(ng-click='pageService.changePage(3)', class='btn lg-btn') Quiz
                 .col-md-4
                     .lg-well
                         div(class='lg-well-header red')

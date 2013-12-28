@@ -7,9 +7,10 @@ var WordSchema = new mongoose.Schema({
   },
   word: String,
   translations: [{
-          POST: String,
+          POS: String,
           sense: String,
-          term: String          
+          term: String,    
+          tags: [String]
     }]
 });
 

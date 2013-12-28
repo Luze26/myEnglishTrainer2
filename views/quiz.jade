@@ -1,0 +1,29 @@
+.row
+    .col-xs-12
+        div(ng-controller='quizCtrl', ng-show="pageService.page === 3", ng-cloak, class="page page-animation lg-well")
+            div(class='lg-well-header blue') Quiz
+                ul
+                    li(ng-click='pageService.changePage(1)') Retourner au tableau de bord
+            div
+                .col-xs-4(ng-hide='quizStarted')
+                    Choisir un lexique
+                    ul(class='dashboard-lexicons')
+                        li(ng-repeat='lexicon in lexicons', ng-click='selectLexicon(lexicon)') {{lexicon.name}}
+                div(ng-show='quizStarted', ng-cloak)
+                    {{word.word}}
+                    input(type='text', ng-model='response', required)
+                    button(ng-click='checkResponse()', class='btn btn-primary btn-margin') Ok
+                    table(class='table table-striped table-bordered table-hover', ng-show='showAnswer')
+                        thead
+                            tr
+                                th(class='col-xs-1') POS
+                                th(class='col-xs-2') Traduction
+                                th(class='col-xs-5') Sens
+                                th(class='col-xs-5') Tags
+                        tbody
+                            tr(ng-repeat='translation in word.translations')
+                                td(class='col-xs-1') {{translation.POS}}
+                                td(class='col-xs-2') {{translation.term}}
+                                td(class='col-xs-4') {{translation.sense}}
+                                td(class='col-xs-5') {{translation.tags}}
+                    button(ng-click='nextWord()', class='btn btn-primary btn-margin') Suivant
