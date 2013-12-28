@@ -32,13 +32,9 @@ exports.generate = function(req, res){
           if(translations.length > 0) {
               word.translations = translations;
               words.push(word);
-              number --;
-              if(number <= 0) {
-                  break;
-              }
           }          
       }
-      
+      words = _.sample(words, number);
       res.send(words);
   },
   function(error) {

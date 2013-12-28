@@ -31,13 +31,24 @@ exports.getTranslations = function(req, res){
               if(result.Error) {
                   console.log((result.Error).red);
               }
-              else if(result.term0 && result.term0.PrincipalTranslations) {
-                  if(result.term0.PrincipalTranslations[0].FirstTranslation) {
-                    translations.push(formatTranslation(result.term0.PrincipalTranslations[0].FirstTranslation));
-                    if(result.term0.PrincipalTranslations[0].SecondTranslation) {
-                        translations.push(formatTranslation(result.term0.PrincipalTranslations[0].SecondTranslation));
-                    }
+              else if(result.term0) {
+                  var entries = null;
+                  if(result.term0.PrincipalTranslations) {
+                      entries = result.term0.PrincipalTranslations;
                   }
+                  else if(result.term0.Entries) {
+                      entries = result.term0.Entries;
+                  }
+                  if(entries) {
+                    for(var i = 0; i < Object.keys(entries).length; i++) {
+                        if(entries[i].FirstTranslation) {
+                          translations.push(formatTranslation(entries[i].FirstTranslation));
+                          if(entries[i].SecondTranslation) {
+                              translations.push(formatTranslation(entries[i].SecondTranslation));
+                          }
+                        }
+                    }
+                }
               }
               
               res.send(translations);

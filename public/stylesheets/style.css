@@ -144,15 +144,6 @@
   height: 650px;
   overflow-y: auto;
 }
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 28 déc. 2013, 12:12:44
-    Author     : yuzel
-*/
 body {
   overflow-y: hidden;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -221,6 +212,9 @@ a {
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.lg-well-content {
+  padding: 25px;
 }
 .lg-well-header {
   border-top-left-radius: 4px;
