@@ -68,4 +68,9 @@ angular.module('trainer').controller('quizCtrl', ['$scope', 'quizService', 'lexi
             inputResponse.focus();
         }
     };
+    
+    $scope.newQuiz = function() {
+        $scope.quizStarted = false;
+        $scope.quizFinished = false;
+    };
   }]);

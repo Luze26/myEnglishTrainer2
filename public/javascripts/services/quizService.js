@@ -20,6 +20,7 @@ angular.module('trainer').factory('quizService', ['$http', '$q',
             .success(function(data) {
                 service.words = data;
                 service.index = 0;
+                service.score = 0;
                 deferred.resolve(data[0]); 
             })
             .error(function(error) {

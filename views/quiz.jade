@@ -37,3 +37,4 @@
                         button(ng-click='nextWord()', class='btn btn-primary btn-margin') Suivant
                 div(ng-show='quizFinished', ng-cloak)
                     h2 Score: {{quizService.finalScore}}/20
+                    button(ng-click='newQuiz()', class='btn btn-primary btn-margin') Commencer un nouveau quiz
